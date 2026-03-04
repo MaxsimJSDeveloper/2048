@@ -1,0 +1,34 @@
+name: Build Endgame 2048
+
+on: [push, pull_request]
+
+jobs:
+  build-windows:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install Mingw
+        run: choco install make mingw
+      - name: Build
+        run: |
+          cd resource/raylib && mingw32-make PLATFORM=PLATFORM_DESKTOP
+          cd ../.. && mingw32-make
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: endgame-windows
+          path: endgame.exe
+
+  build-linux:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install Dependencies
+        run: sudo apt-get update && sudo apt-get install -y libx11-dev libxcursor-dev libxrandr-dev libxinerama-dev libxi-dev libgl1-mesa-dev libglu1-mesa-dev
+      - name: Build
+        run: make
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: endgame-linux
+          path: endgame
