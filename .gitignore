@@ -1,13 +1,17 @@
-# Компільовані файли
+# Об'єктні файли та бібліотеки всюди (рекурсивно)
+**/*.o
+**/*.a
 obj/
+
+# Бінарники
 endgame
-*.o
-*.a
+endgame.exe
 
 # Системні файли
 .DS_Store
 .vscode/
+.idea/
 
-# Тимчасові файли Raylib (якщо збирали всередині)
-resource/raylib/libraylib.a
-resource/raylib/*.o
+# Ігноруємо конкретні результати збірки Raylib у підмодулі
+resource/raylib/src/libraylib.a
+resource/raylib/src/*.o
