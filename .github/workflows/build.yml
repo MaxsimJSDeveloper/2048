@@ -14,7 +14,7 @@ jobs:
       - name: Build
         run: |
           cd resource/raylib/src && mingw32-make PLATFORM=PLATFORM_DESKTOP RAYLIB_RELEASE_PATH="."
-          cd ../../.. && mingw32-make
+          cd ../../.. && mingw32-make CC=gcc
       - name: Upload Artifact
         uses: actions/upload-artifact@v4
         with:
