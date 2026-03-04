@@ -7,12 +7,14 @@ jobs:
     runs-on: windows-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          submodules: recursive
       - name: Install Mingw
         run: choco install make mingw
       - name: Build
         run: |
-          cd resource/raylib && mingw32-make PLATFORM=PLATFORM_DESKTOP
-          cd ../.. && mingw32-make
+          cd resource/raylib/src && mingw32-make PLATFORM=PLATFORM_DESKTOP RAYLIB_RELEASE_PATH="."
+          cd ../../.. && mingw32-make
       - name: Upload Artifact
         uses: actions/upload-artifact@v4
         with:
@@ -23,6 +25,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          submodules: recursive
       - name: Install Dependencies
         run: sudo apt-get update && sudo apt-get install -y libx11-dev libxcursor-dev libxrandr-dev libxinerama-dev libxi-dev libgl1-mesa-dev libglu1-mesa-dev
       - name: Build

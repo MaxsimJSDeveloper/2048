@@ -1,8 +1,11 @@
 NAME = endgame
 CC = clang
 
-RAYLIB_DIR = resource/raylib
+# Шляхи до підмодуля
+RAYLIB_DIR = resource/raylib/src
+# Файл бібліотеки тепер буде шукатися в папці src підмодуля
 RAYLIB_A = $(RAYLIB_DIR)/libraylib.a
+
 OBJ_DIR = obj
 SRC_DIR = src
 INC_DIR = inc
@@ -17,15 +20,15 @@ UNAME_S := $(shell uname -s)
 ifeq ($(OS),Windows_NT)
     RM = rm -rf
     NAME_BIN = $(NAME).exe
-    LDFLAGS = $(RAYLIB_A) -lgdi32 -lwinmm -lopengl32
+    LDFLAGS = -L$(RAYLIB_DIR) -lraylib -lgdi32 -lwinmm -lopengl32
 else
     RM = rm -rf
     NAME_BIN = $(NAME)
     ifeq ($(UNAME_S), Linux)
-        LDFLAGS = $(RAYLIB_A) -lGL -lm -lpthread -ldl -lrt -lX11
+        LDFLAGS = -L$(RAYLIB_DIR) -lraylib -lGL -lm -lpthread -ldl -lrt -lX11
     endif
     ifeq ($(UNAME_S), Darwin)
-        LDFLAGS = $(RAYLIB_A) -framework IOKit -framework Cocoa -framework OpenGL
+        LDFLAGS = -L$(RAYLIB_DIR) -lraylib -framework IOKit -framework Cocoa -framework OpenGL
     endif
 endif
 
@@ -36,8 +39,8 @@ $(NAME_BIN): $(RAYLIB_A) $(OBJS)
 	@echo "SUCCESS: $(NAME_BIN) created for $(UNAME_S)."
 
 $(RAYLIB_A):
-	@echo "Building Raylib from source..."
-	@$(MAKE) -C $(RAYLIB_DIR) PLATFORM=PLATFORM_DESKTOP
+	@echo "Building Raylib submodule..."
+	@$(MAKE) -C $(RAYLIB_DIR) PLATFORM=PLATFORM_DESKTOP RAYLIB_RELEASE_PATH="."
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c | $(OBJ_DIR)
 	@$(CC) $(CFLAGS) -c $< -o $@
