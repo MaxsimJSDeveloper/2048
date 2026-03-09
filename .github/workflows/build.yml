@@ -15,11 +15,16 @@ jobs:
         run: |
           cd resource/raylib/src && mingw32-make PLATFORM=PLATFORM_DESKTOP RAYLIB_RELEASE_PATH="."
           cd ../../.. && mingw32-make CC=gcc
+      - name: Cleanup raylib source
+        run: rm -rf resource/raylib
       - name: Upload Artifact
         uses: actions/upload-artifact@v4
         with:
           name: endgame-windows
-          path: endgame.exe
+          path: |
+            endgame.exe
+            resource/
+            README.md
 
   build-linux:
     runs-on: ubuntu-latest
@@ -31,8 +36,13 @@ jobs:
         run: sudo apt-get update && sudo apt-get install -y libx11-dev libxcursor-dev libxrandr-dev libxinerama-dev libxi-dev libgl1-mesa-dev libglu1-mesa-dev
       - name: Build
         run: make
+      - name: Cleanup raylib source
+        run: rm -rf resource/raylib
       - name: Upload Artifact
         uses: actions/upload-artifact@v4
         with:
           name: endgame-linux
-          path: endgame
+          path: |
+            endgame
+            resource/
+            README.md
