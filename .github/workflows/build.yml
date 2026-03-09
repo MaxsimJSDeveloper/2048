@@ -50,3 +50,21 @@ jobs:
             endgame
             resource/
             README.md
+  build-macos:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: recursive
+      - name: Build
+        run: make
+      - name: Cleanup raylib source
+        run: rm -rf resource/raylib
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: endgame-macos
+          path: |
+            endgame
+            resource/
+            README.md
