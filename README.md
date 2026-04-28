@@ -26,3 +26,14 @@ Since this project uses submodules, use the following command:
 git clone --recursive [https://github.com/MaxsimJSDeveloper/2048.git](https://github.com/MaxsimJSDeveloper/2048.git)
 
 ```
+
+# 🎥 Presentation
+
+[![2048 Endgame Gameplay](https://img.youtube.com/vi/3-kpB6ZUXF4/maxresdefault.jpg)](https://www.youtube.com/watch?v=3-kpB6ZUXF4)
+_Click the thumbnail above to watch the gameplay video!_
+
+## 📸 Screenshots
+
+|                                Start Menu                                |                                 Select Board                                 |                                 Game Process                                 |                                Scoreboard                                |
+| :----------------------------------------------------------------------: | :--------------------------------------------------------------------------: | :--------------------------------------------------------------------------: | :----------------------------------------------------------------------: |
+| <img src="./resource/img/start_menu.png" width="200" alt="Start Menu" /> | <img src="./resource/img/select_board.png" width="200" alt="Select Board" /> | <img src="./resource/img/game_process.png" width="200" alt="Game Process" /> | <img src="./resource/img/scoreboard.png" width="200" alt="Scoreboard" /> |
